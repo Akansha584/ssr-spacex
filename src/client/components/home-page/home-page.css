@@ -1,0 +1,29 @@
+.fr {
+    display: flex;
+  }
+  
+  .mr_20{
+    margin: 20px;
+  }
+  
+  .ml_20{
+    margin: 12px 20px
+  }
+  
+  .mt_40{
+    margin-top: 40px
+  }
+  
+  .center{
+    text-align: center;
+  }
+  
+  .w_1400 {
+    width: 1400px;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .f_wrap {
+      flex-wrap: wrap;
+    }
+  }

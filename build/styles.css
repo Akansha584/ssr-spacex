@@ -1,0 +1,188 @@
+.fr {
+    display: flex;
+  }
+  
+  .mr_20{
+    margin: 20px;
+  }
+  
+  .ml_20{
+    margin: 12px 20px
+  }
+  
+  .mt_40{
+    margin-top: 40px
+  }
+  
+  .center{
+    text-align: center;
+  }
+  
+  .w_1400 {
+    width: 1400px;
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .f_wrap {
+      flex-wrap: wrap;
+    }
+  }
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+  
+.card-heading {
+    margin-right: 2px;
+}
+
+.card-value {
+  color: grey;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 700px) {
+  .width_mobile {
+    width: 200px;
+  }
+}
+
+
+  
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-family: arial;
+    padding: 24px;
+    margin-right:20px;
+    margin-bottom: 18px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.fr {
+    display: flex;
+}
+
+.frc {
+    display: flex;
+    flex-direction: column
+}
+
+.spb {
+    justify-content: space-between;
+}
+
+.fwrap{
+    flex-wrap: wrap
+}
+
+.alIs {
+    align-items: start;
+}
+
+.alIc {
+    align-items: center;
+}
+
+.jtc {
+    justify-content: center;
+}
+
+.fs_18 {
+    font-size: 16px;
+}
+
+.w200{
+    width: 200px
+}
+
+.w_140{
+    width: 140px;
+}
+
+.mb_12 {
+    margin-bottom: 12px;
+}
+
+.mr_24 {
+    margin-right: 24px;
+}
+
+.mr_31 {
+    margin-right: 31px;
+}
+
+.mr_30 {
+    margin-right: 30px;
+}
+
+.ml_24 {
+    margin-left: 24px
+}
+
+.mb_24 {
+    margin-bottom: 24px;
+}
+
+.mt_12 {
+    margin-top: 12px;
+}
+
+.mt_3{
+    margin-top: 3px;
+}
+
+.mt_0{
+    margin-top: 0px
+}
+
+.mr0 {
+    margin:0;
+}
+
+.db {
+    display: block;
+}
+
+.idb {
+    display: inline-block;
+}
+
+.p-button {
+    padding: 4px 12px
+}
+
+.pt_8{
+    padding-top: 8px
+}
+
+.bck-gr{
+    background-color: rgb(197, 224, 154)
+}
+
+.bck-click-gr {
+    background-color: rgb(124, 187, 0)
+}
+
+.br5{
+    border-radius: 5px;
+    border: 0px
+}
+.imageContainer {
+    border: 5px solid #F2F2F2;
+    background-color: #f2f2f2;
+}
+
+.cardImage {
+    width: 30;
+    height: 30;
+}
+
+.imageTitle {
+    color: #483D8b;
+}
+
+
+
