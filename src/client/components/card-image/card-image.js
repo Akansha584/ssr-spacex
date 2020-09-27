@@ -6,7 +6,7 @@ const CardImage = (props) => {
     return (
         <div>
             <div className="imageContainer">
-                <img src={logo} alt="Denim Jeans" className="cardImage" />
+                <img src={props.imageLink} alt="Denim Jeans" className="cardImage" />
             </div>
             <h3 className="fs_16 imageTitle " style={{ maxWidth: 'fit-content' }}>{`${props.missionName}#${props.flightNumber}`}</h3>
         </div>
