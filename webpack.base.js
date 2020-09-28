@@ -7,6 +7,7 @@ const plugins = [
 ]
 
 module.exports = {
+  mode: "development",
   module: {
     rules: [
       {

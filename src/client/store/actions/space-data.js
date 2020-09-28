@@ -17,11 +17,9 @@ const createAPIString = (filters = {}) => {
 }
 
 export const fetchFilteredData = (filters) => {
-    return function (dispatch, getState) {
+    return async (dispatch) => {
         let apiString = createAPIString(filters);
-        axios.get(`https://api.spacexdata.com/v3/launches?limit=100${apiString}`)
-            .then(response => {
-                dispatch(receive_filteredData(response));
-            })
+        const res = await axios.get(`https://api.spacexdata.com/v3/launches?limit=100${apiString}`)
+        dispatch(receive_filteredData(res));
     }
 }

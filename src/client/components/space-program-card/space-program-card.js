@@ -42,7 +42,7 @@ const CardDetails = (props) => {
     )
 }
 
-const Card = (props) => {
+const SpaceProgramCard = (props) => {
 
     useEffect(() => {
         props.getFilteredData();
@@ -74,7 +74,6 @@ const Card = (props) => {
 const mapStateToProps = (state) => {
     return {
         cardData: state.spaceDataReducer.cardData.data || []
-
     }
 }
 
@@ -84,4 +83,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+const loadDataSSR = (store) => {
+    return store.dispatch(fetchFilteredData())
+}
+
+export { loadDataSSR };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpaceProgramCard);

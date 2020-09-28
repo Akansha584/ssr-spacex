@@ -59,7 +59,6 @@ const getLaunchAndLandFilters = (heading, handleClick, key, filters) => {
 const FilterCard = (props) => {
     const [filters, setFilters] = useState({});
 
-
     useEffect(() => {
         props.appliedFilters(filters);
     }, [filters]);
