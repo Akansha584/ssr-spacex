@@ -3,7 +3,10 @@ import "./space-program-card.css";
 import "../styles.css";
 import CardImage from "../card-image/card-image";
 import { connect } from "react-redux";
-import { fetchFilteredData } from "../../store/actions/space-data";
+import {
+  fetchFilteredData,
+  fetchFilteredDataSSR,
+} from "../../store/actions/space-data";
 
 const MISSION_IDS = "Mission Ids:";
 const LAUNCH_YEAR = "Launch Year:";
@@ -56,11 +59,6 @@ const SpaceProgramCard = (props) => {
 
   return (
     <div className="fr fwrap">
-      {props.isFetching ? (
-        <div className="loader" style={{ position: "fixed" }}>
-          loading
-        </div>
-      ) : null}
       {props.cardData.map((card) => {
         return (
           <div className="card fs_18 frc width_mobile">
@@ -84,19 +82,19 @@ const SpaceProgramCard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cardData: state.spaceDataReducer.cardData.data || [],
-    isFetching: state.spaceDataReducer.isFetching,
+    cardData: state.spaceDataReducer.cardData || [],
+    filters: state.spaceDataReducer.filters || {},
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getFilteredData: () => dispatch(fetchFilteredData()),
+    getFilteredData: (filters) => dispatch(fetchFilteredData(filters)),
   };
 };
 
-const loadDataSSR = (store) => {
-  return store.dispatch(fetchFilteredData());
+const loadDataSSR = (store, queryParams) => {
+  return store.dispatch(fetchFilteredDataSSR(queryParams));
 };
 
 export { loadDataSSR };

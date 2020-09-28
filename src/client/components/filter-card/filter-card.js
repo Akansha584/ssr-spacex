@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./filter-card.css";
 import "../styles.css";
 import { connect } from "react-redux";
-import { fetchFilteredData } from "../../store/actions/space-data";
+import { fetchFilteredData, setFilter, removeFilter } from "../../store/actions/space-data";
+import { withRouter } from 'react-router';
+import { Link } from "react-router-dom";
 
 const FILTERS = "Filters";
 const LAUNCH_YEAR = "Launch Year";
@@ -19,25 +21,29 @@ const YEARS = [
   [2020],
 ];
 
-const getLaunchYear = (handleClick, filters) => {
+const getLaunchYear = (handleClick, filters, props) => {
   let years = YEARS.map((year) => {
-    let filteredColor =
-      filters["launch_year"] === year ? "bck-click-gr" : "bck-gr";
+    let filteredColorFor1stYear =
+      filters["launch_year"] === year[0] ? "bck-click-gr" : "bck-gr";
+    let filteredColorFor2ndYear =
+      filters["launch_year"] === year[1] ? "bck-click-gr" : "bck-gr";
     return (
       <div className="fr">
-        <button
-          className={`mr_24 mb_24 p-button br5 ${filteredColor}`}
-          onClick={() => handleClick(year, "launch_year")}
+        <Link
+          className={`mr_24 mb_24 p-button br5 filter-button ${filteredColorFor1stYear}`}
+          onClick={() => handleClick(year[0], "launch_year")}
+          to={`${props.location.pathname}?launch_year=${year[0]}`}
         >
           {year[0]}
-        </button>
+        </Link>
         {year[1] && (
-          <button
-            className={`mb_24 p-button br5 ${filteredColor}`}
-            onClick={() => handleClick(year, "launch_year")}
+          <Link
+            className={`mb_24 p-button br5 filter-button ${filteredColorFor2ndYear}`}
+            onClick={() => handleClick(year[1], "launch_year")}
+            to={`${props.location.pathname}?launch_year=${year[1]}`}
           >
             {year[1]}
-          </button>
+          </Link>
         )}
       </div>
     );
@@ -51,7 +57,7 @@ const getLaunchYear = (handleClick, filters) => {
   );
 };
 
-const getLaunchAndLandFilters = (heading, handleClick, key, filters) => {
+const getLaunchAndLandFilters = (heading, handleClick, key, filters, props) => {
   let filteredColorForTrue = "bck-gr";
   let filteredColorForFalse = "bck-gr";
   if (filters[key] === true) {
@@ -64,25 +70,27 @@ const getLaunchAndLandFilters = (heading, handleClick, key, filters) => {
       <span>{heading}</span>
       <hr className="mb_12 mt_0 w_140 mt_3"></hr>
       <div className="fr spb mt_12">
-        <button
-          className={`p-button br5 ${filteredColorForTrue}`}
+        <Link
+          className={`p-button br5 filter-button ${filteredColorForTrue}`}
           onClick={() => handleClick(true, key)}
+          to={`${props.location.pathname}?${key}=${true}`}
         >
           True
-        </button>
-        <button
-          className={`p-button br5 ${filteredColorForFalse}`}
+        </Link>
+        <Link
+          className={`p-button br5 filter-button ${filteredColorForFalse}`}
           onClick={() => handleClick(false, key)}
+          to={`${props.location.pathname}?${key}=${false}`}
         >
           False
-        </button>
+        </Link>
       </div>
     </div>
   );
 };
 
 const FilterCard = (props) => {
-  const [filters, setFilters] = useState({});
+  const { filters, setFilters, removeFilters } = props;
 
   useEffect(() => {
     props.appliedFilters(filters);
@@ -90,33 +98,29 @@ const FilterCard = (props) => {
 
   const handleClick = (value, key) => {
     if (filters[key] === undefined || filters[key] !== value) {
-      setFilters({
-        ...filters,
-        [key]: value,
-      });
+      setFilters(key, value);
     } else {
-      delete filters[key];
-      setFilters({
-        ...filters,
-      });
+      removeFilters(key);
     }
   };
   return (
     <div className="card w200 mr_30 pt_8" style={{ height: "fit-content" }}>
       <h3 className="mt_0">{FILTERS}</h3>
       <div className="frc alIc">
-        {getLaunchYear(handleClick, filters)}
+        {getLaunchYear(handleClick, filters, props)}
         {getLaunchAndLandFilters(
           SUCCESSFUL_LAUNCH,
           handleClick,
           "launch_success",
-          filters
+          filters,
+          props
         )}
         {getLaunchAndLandFilters(
           SUCCESSFUL_LANDING,
           handleClick,
           "land_success",
-          filters
+          filters,
+          props
         )}
       </div>
     </div>
@@ -126,7 +130,13 @@ const FilterCard = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     appliedFilters: (filters) => dispatch(fetchFilteredData(filters)),
+    setFilters: (key, value) => dispatch(setFilter(key, value)),
+    removeFilters: (key) => dispatch(removeFilter(key))
   };
 };
 
-export default connect(null, mapDispatchToProps)(FilterCard);
+const mapStateToProps = state => ({
+  filters: state.spaceDataReducer.filters
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FilterCard));

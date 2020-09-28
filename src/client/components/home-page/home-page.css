@@ -1,3 +1,6 @@
+body {
+  margin: 0px;
+}
 .fr {
   display: flex;
 }
@@ -6,9 +9,25 @@
   margin: 20px;
 }
 
-/* .ml_20 {
-  margin: 12px 20px;
-} */
+.ml_20 {
+  margin: 0px 20px;
+}
+
+.mt_40 {
+  margin-top: 40px;
+}
+
+.center {
+  text-align: center;
+}
+
+.mr_20 {
+  margin: 20px;
+}
+
+.ml_20 {
+  margin: 0px 20px;
+}
 
 .mt_40 {
   margin-top: 40px;

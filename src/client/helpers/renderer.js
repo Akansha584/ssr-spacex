@@ -4,6 +4,8 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";
 import Routes from "../../../routes";
+import serialize from "serialize-javascript";
+import { Helmet } from "react-helmet";
 
 export default (req, store) => {
   const content = renderToString(
@@ -13,13 +15,21 @@ export default (req, store) => {
       </StaticRouter>
     </Provider>
   );
+
+  const helmet = Helmet.renderStatic();
   return `
      <html>
       <head>
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./styles.css"/>
       </head>
       <body>
         <div id="root">${content}</div>
+        <script>
+          window.INITIAL_STATE = ${serialize(store.getState())}
+        </script>
         <script src="bundle.js"></script>
       </body>
     </html>
