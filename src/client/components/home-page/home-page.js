@@ -9,7 +9,7 @@ const DEVELOPER_NAME = "Akansha Gupta";
 
 const HomePage = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: "grey" }}>
       <h1 className="ml_20">{SPACEX_LAUNCH_PROGRAM}</h1>
       <div className="fr mr_20 f_wrap">
         <FilterCard />

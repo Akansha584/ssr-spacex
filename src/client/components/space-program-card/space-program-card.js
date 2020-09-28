@@ -52,7 +52,7 @@ const SpaceProgramCard = (props) => {
         <div className="fr fwrap">
             {props.cardData.map((card) => {
                 return (
-                    <div className="card fs_18 frc width_mobile" style={{ height: 'fit-content' }}>
+                    <div className="card fs_18 frc width_mobile">
                         <CardImage
                             missionName={card.mission_name}
                             flightNumber={card.flight_number}

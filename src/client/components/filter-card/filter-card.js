@@ -3,6 +3,7 @@ import "./filter-card.css";
 import "../styles.css";
 import { connect } from "react-redux";
 import { fetchFilteredData } from "../../store/actions/space-data";
+import { Link, withRouter } from 'react-router';
 
 const FILTERS = "Filters";
 const LAUNCH_YEAR = "Launch Year";
@@ -21,20 +22,22 @@ const YEARS = [
 
 const getLaunchYear = (handleClick, filters) => {
   let years = YEARS.map((year) => {
-    let filteredColor =
-      filters["launch_year"] === year ? "bck-click-gr" : "bck-gr";
+    let filteredColorFor1stYear =
+      filters["launch_year"] === year[0] ? "bck-click-gr" : "bck-gr";
+    let filteredColorFor2ndYear =
+      filters["launch_year"] === year[1] ? "bck-click-gr" : "bck-gr";
     return (
       <div className="fr">
         <button
-          className={`mr_24 mb_24 p-button br5 ${filteredColor}`}
-          onClick={() => handleClick(year, "launch_year")}
+          className={`mr_24 mb_24 p-button br5 ${filteredColorFor1stYear}`}
+          onClick={() => handleClick(year[0], "launch_year")}
         >
           {year[0]}
         </button>
         {year[1] && (
           <button
-            className={`mb_24 p-button br5 ${filteredColor}`}
-            onClick={() => handleClick(year, "launch_year")}
+            className={`mb_24 p-button br5 ${filteredColorFor2ndYear}`}
+            onClick={() => handleClick(year[1], "launch_year")}
           >
             {year[1]}
           </button>
@@ -129,4 +132,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(FilterCard);
+export default connect(null, mapDispatchToProps)(withRouter(FilterCard));
