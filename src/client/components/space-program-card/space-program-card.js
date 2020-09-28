@@ -15,8 +15,8 @@ const CardDetails = (props) => {
     if (props.missionIds.length > 0) {
         missionIds = (
             <ul className="mr0">
-                {props.missionIds.map(missionId => {
-                    return <li>{missionId}</li>
+                {props.missionIds.map((missionId, index) => {
+                    return <li key={index}>{missionId}</li>
                 })}
             </ul>
         )
@@ -24,20 +24,20 @@ const CardDetails = (props) => {
     return (
         <div>
             <div className="mb_12">
-                <h3 className="card-heading mb_12">{MISSION_IDS}</h3>
+                <h3 className="card-heading mb_12 mr_4">{MISSION_IDS}</h3>
                 {missionIds}
             </div>
             <div className="fr mb_12 alIc">
-                <h3 className="card-heading mr0">{LAUNCH_YEAR}</h3>
-                <span className="card-value">{props.launchYear}</span>
+                <h3 className="card-heading mr0 mr_4">{LAUNCH_YEAR}</h3>
+                <span className="card-value key-color">{props.launchYear}</span>
             </div>
             <div className="fr mb_12 alIc">
-                <h3 className="card-heading mr0">{SUCCESSFULL_LAUNCH}</h3>
-                <span className="card-value">{`${props.successfulLaunch}`}</span>
+                <h3 className="card-heading mr0 mr_4">{SUCCESSFULL_LAUNCH}</h3>
+                <span className="card-value key-color">{`${props.successfulLaunch}`}</span>
             </div>
             <div className="fr mb_12 alIc">
-                <h3 className="card-heading mr0">{SUCCESSFULL_LANDING}</h3>
-                <span className="card-value">{`${props.successfulLanding}`}</span>
+                <h3 className="card-heading mr0 mr_4">{SUCCESSFULL_LANDING}</h3>
+                <span className="card-value key-color">{`${props.successfulLanding}`}</span>
             </div>
         </div>
     )
@@ -51,9 +51,9 @@ const SpaceProgramCard = (props) => {
 
     return (
         <div className="fr fwrap">
-            {props.cardData.length > 0 && props.cardData.map((card) => {
+            {props.cardData.length > 0 && props.cardData.map((card, index) => {
                 return (
-                    <div className="card fs_18 frc width_mobile">
+                    <div className="card fs_18 frc width_mobile" key={index}>
                         <CardImage
                             missionName={card.mission_name}
                             flightNumber={card.flight_number}

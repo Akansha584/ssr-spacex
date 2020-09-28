@@ -9,9 +9,11 @@
 }
 
 .card-value {
-  color: grey;
-  font-weight: bold;
   font-size: 18px;
+}
+
+.key-color {
+  color: #483d8b;
 }
 
 @media only screen and (max-width: 700px) {

@@ -22,13 +22,13 @@ const YEARS = [
 ];
 
 const getLaunchYear = (handleClick, filters, props) => {
-  let years = YEARS.map((year) => {
+  let years = YEARS.map((year, index) => {
     let filteredColorFor1stYear =
       filters["launch_year"] === year[0] ? "bck-click-gr" : "bck-gr";
     let filteredColorFor2ndYear =
       filters["launch_year"] === year[1] ? "bck-click-gr" : "bck-gr";
     return (
-      <div className="fr">
+      <div className="fr" key={index}>
         <Link
           className={`mr_24 mb_24 p-button br5 filter-button ${filteredColorFor1stYear}`}
           onClick={() => handleClick(year[0], "launch_year")}

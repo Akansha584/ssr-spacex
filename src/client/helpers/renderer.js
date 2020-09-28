@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";
 import Routes from "../../../routes";
 import serialize from 'serialize-javascript';
+import { Helmet } from "react-helmet";
 
 export default (req, store) => {
   const content = renderToString(
@@ -14,11 +15,15 @@ export default (req, store) => {
       </StaticRouter>
     </Provider>
   );
+
+  const helmet = Helmet.renderStatic();
   return `
      <html>
       <head>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./styles.css"/>
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
       </head>
       <body>
         <div id="root">${content}</div>

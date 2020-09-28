@@ -90,6 +90,10 @@
     margin:0;
 }
 
+.mr_4 {
+  margin-right: 4px;
+}
+
 .db {
     display: block;
 }
