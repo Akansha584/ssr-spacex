@@ -3,7 +3,7 @@ import './space-program-card.css';
 import '../styles.css';
 import CardImage from "../card-image/card-image";
 import { connect } from 'react-redux';
-import { fetchFilteredData } from '../../store/actions/space-data'
+import { fetchFilteredData, fetchFilteredDataSSR } from '../../store/actions/space-data'
 
 const MISSION_IDS = "Mission Ids:";
 const LAUNCH_YEAR = "Launch Year:";
@@ -21,36 +21,37 @@ const CardDetails = (props) => {
             </ul>
         )
     }
-    return (<div>
-        <div className="mb_12">
-            <h3 className="card-heading mb_12">{MISSION_IDS}</h3>
-            {missionIds}
+    return (
+        <div>
+            <div className="mb_12">
+                <h3 className="card-heading mb_12">{MISSION_IDS}</h3>
+                {missionIds}
+            </div>
+            <div className="fr mb_12 alIc">
+                <h3 className="card-heading mr0">{LAUNCH_YEAR}</h3>
+                <span className="card-value">{props.launchYear}</span>
+            </div>
+            <div className="fr mb_12 alIc">
+                <h3 className="card-heading mr0">{SUCCESSFULL_LAUNCH}</h3>
+                <span className="card-value">{`${props.successfulLaunch}`}</span>
+            </div>
+            <div className="fr mb_12 alIc">
+                <h3 className="card-heading mr0">{SUCCESSFULL_LANDING}</h3>
+                <span className="card-value">{`${props.successfulLanding}`}</span>
+            </div>
         </div>
-        <div className="fr mb_12 alIc">
-            <h3 className="card-heading mr0">{LAUNCH_YEAR}</h3>
-            <span className="card-value">{props.launchYear}</span>
-        </div>
-        <div className="fr mb_12 alIc">
-            <h3 className="card-heading mr0">{SUCCESSFULL_LAUNCH}</h3>
-            <span className="card-value">{`${props.successfulLaunch}`}</span>
-        </div>
-        <div className="fr mb_12 alIc">
-            <h3 className="card-heading mr0">{SUCCESSFULL_LANDING}</h3>
-            <span className="card-value">{`${props.successfulLanding}`}</span>
-        </div>
-    </div>
     )
 }
 
 const SpaceProgramCard = (props) => {
 
     useEffect(() => {
-        props.getFilteredData();
-    }, []);
+        props.getFilteredData(props.filters);
+    }, [props.filters]);
 
     return (
         <div className="fr fwrap">
-            {props.cardData.map((card) => {
+            {props.cardData.length > 0 && props.cardData.map((card) => {
                 return (
                     <div className="card fs_18 frc width_mobile">
                         <CardImage
@@ -73,18 +74,19 @@ const SpaceProgramCard = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        cardData: state.spaceDataReducer.cardData.data || []
+        cardData: state.spaceDataReducer.cardData || [],
+        filters: state.spaceDataReducer.filters || {}
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getFilteredData: () => dispatch(fetchFilteredData())
+        getFilteredData: (filters) => dispatch(fetchFilteredData(filters))
     }
 }
 
-const loadDataSSR = (store) => {
-    return store.dispatch(fetchFilteredData())
+const loadDataSSR = (store, queryParams) => {
+    return store.dispatch(fetchFilteredDataSSR(queryParams));
 }
 
 export { loadDataSSR };
